@@ -1,0 +1,44 @@
+
+    def cross_over(self, a, b):
+        new_w = []
+        for i in range (len(a.W)):
+            new_w.append([])
+            for j in range(len(a.W[i])):
+                new_w[i].append([])
+                for k in range(len(a.W[i][j])):
+                    if np.random.random_sample() > 0.5:
+                        new_w[i][j].append(a.W[i][j][k])
+                    else:
+                        new_w[i][j].append(b.W[i][j][k])
+            new_w[i] = np.array(new_w[i])
+
+        new_b = []
+        for i in range(len(a.B)):
+            new_b.append([])
+            for j in range(len(a.B[i])):
+                if np.random.random_sample() > 0.5:
+                    new_b[i].append(a.B[i][j])
+                else:
+                    new_b[i].append(b.B[i][j])
+            new_b[i] = np.array(new_b[i])
+
+       # print ("a", a.W)
+       # print("b", b.W)
+        #print ("nowe", new_w)
+        return new_w, new_b
+
+    def mutate_w(self):
+        #2 x 2d array
+        for i in range(len(self.W)):
+            for j in range(len(self.W[i])):
+                for k in range(len(self.W[i][j])):
+                    if np.random.random_sample() < 0.3:
+                        self.W[i][j][k] = np.random.randn()
+
+    def mutate_b(self):
+        #2 x 1d array
+        for i in range(len(self.B)):
+            for j in range(len(self.B[i])):
+                if np.random.random_sample() < 0.3:
+                    self.B[i][j] = np.random.randn()
+
